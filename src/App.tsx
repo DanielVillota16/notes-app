@@ -90,13 +90,16 @@ function App() {
             <Col xs={15} sm={15} md={15} lg={15} xl={10}>
               {notes.map(
                 (note) =>
-                  <Note
-                    id={note.id ?? "0"}
-                    title={note.nameTask}
-                    description={note.description}
-                    handleDelete={handleDeleteNote}
-                    handleEdit={handleEditNote}
-                  />
+                  <>
+                    <Note
+                      id={note.id ?? "0"}
+                      title={note.nameTask}
+                      description={note.description}
+                      handleDelete={handleDeleteNote}
+                      handleEdit={handleEditNote}
+                    />
+                    <Divider />
+                  </>
               )}
             </Col>
           </Row>
