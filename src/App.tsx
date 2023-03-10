@@ -20,12 +20,6 @@ function App() {
     requestData();
   }, []);
 
-  useEffect(() => {
-    console.log('creatingNote', creatingNote);
-    console.log('editingNote', editingNote);
-    console.log(notes);
-  }, [creatingNote, editingNote, notes]);
-
   const hideModal = (action: Action) => {
     let change;
     switch (action) {
