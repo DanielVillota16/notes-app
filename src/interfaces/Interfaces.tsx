@@ -1,6 +1,6 @@
 interface Note {
-  id?: number
-  title: string;
+  id?: string
+  nameTask: string;
   description: string;
 }
 

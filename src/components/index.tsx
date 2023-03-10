@@ -1,4 +1,4 @@
 import Note from "./Note/Note";
-import CreateNoteModal from "./Note/CreateNoteModal";
+import NoteModal from "./Note/NoteModal";
 
-export { Note, CreateNoteModal };
+export { Note, NoteModal };

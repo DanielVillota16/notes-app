@@ -1,4 +1,4 @@
-type RequestMethod = 'get' | 'post' | 'put' | 'delete';
+type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
 const makeRequest = async (url: string, method: RequestMethod, body?: any) => {
   const res = await fetch(url, {
@@ -6,10 +6,9 @@ const makeRequest = async (url: string, method: RequestMethod, body?: any) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    mode: 'no-cors',
     body: JSON.stringify(body)
   });
-  return res.text();
+  return res.json();
 }
 
 export default makeRequest;

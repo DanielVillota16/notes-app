@@ -1,31 +1,43 @@
+import { useEffect } from 'react';
 import { Modal, Form, Input, message } from "antd";
 import { Note } from "../../interfaces/Interfaces";
 
 const { TextArea } = Input;
 
-interface CreateNoteProps {
+interface NoteModalProps {
   open: boolean;
-  handleCancel: () => void;
-  handleOk: (values: Note) => void;
+  edit?: Note;
+  handleClose: () => void;
+  handleOk: (note: Note) => void;
 }
 
-const CreateNoteModal: React.FC<CreateNoteProps> = ({ open, handleCancel, handleOk }) => {
+const NoteModal: React.FC<NoteModalProps> = ({ open, handleClose, handleOk, edit }) => {
 
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    form.setFieldsValue(edit);
+  }, [edit, form]);
+
+  const close = () => {
+    form.resetFields();
+    handleClose();
+  }
 
   return (
     <Modal
       open={open}
-      title="Create a new note"
-      okText="Create"
+      title={edit?"Update your note":"Create a new note"}
+      okText={edit?"Update":"Create"}
       cancelText="Cancel"
-      onCancel={handleCancel}
+      onCancel={close}
       onOk={() => {
         form
           .validateFields()
           .then((values: Note) => {
             form.resetFields();
             handleOk(values);
+            close();
           })
           .catch((info) => {
             message.error('Validate Failed: ' + info.reason);
@@ -36,10 +48,9 @@ const CreateNoteModal: React.FC<CreateNoteProps> = ({ open, handleCancel, handle
         form={form}
         layout="vertical"
         name="form_in_modal"
-        initialValues={{ modifier: 'public' }}
       >
         <Form.Item
-          name="title"
+          name="nameTask"
           label="Title"
           rules={[{ required: true, message: 'Please input the title!' }]}
         >
@@ -57,4 +68,4 @@ const CreateNoteModal: React.FC<CreateNoteProps> = ({ open, handleCancel, handle
   )
 }
 
-export default CreateNoteModal;
+export default NoteModal;
